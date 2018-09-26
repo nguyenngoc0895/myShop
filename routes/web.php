@@ -28,6 +28,12 @@ Route::group(['middleware' => ['auth']], function(){
     ///route setting acc
     Route::get('admin/setting', 'AdminController@setting')->name('admin.setting');
 
-    //route change pass acc ad
+    //route check pass acc ad
     Route::get('admin/check-pwd', 'AdminController@chkPassword');
+
+    ///route updatepassword
+    Route::match(['get', 'post'], '/admin/updatePassword', 'AdminController@UpdatePassword')->name('admin.updatePassword');
+
+    //category routes
+    Route::resource('admin/category', 'CategoryController');
 });

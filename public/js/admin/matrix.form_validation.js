@@ -1,49 +1,76 @@
 $(document).ready(function () {
 
-    $("#current_pwd").keyup(function () {
-        var current_pwd = $("#current_pwd").val();
-        $.ajax({
-            type: 'get',
-            url: '/admin/check-pwd',
-            data: {
-                'current_pwd': current_pwd
-            },
-            success: function (resp) {
-                console.log(resp);
-                if (resp == "false") {
-                    $("#chkPwd").html("<font color='red'>Current Password is incorrect</font>");
-                } else if (resp == "true") {
-                    $("#chkPwd").html("<font color='green'>Current Password is correct</font>");
-                }
-            },
-            error: function (e) {
-                console.log(e)
-                // alert(e);
-            }
-        });
-    });
+    // $("#current_pwd").keyup(function () {
+    //     var current_pwd = $("#current_pwd").val();
+    //     $.ajax({
+    //         type: 'get',
+    //         url: '/admin/check-pwd',
+    //         data: {
+    //             'current_pwd': current_pwd
+    //         },
+    //         success: function (resp) {
+    //             console.log(resp);
+    //             if (resp == "false") {
+    //                 $("#chkPwd").html("<font color='red'>Current Password is incorrect</font>");
+    //             } else if (resp == "true") {
+    //                 $("#chkPwd").html("<font color='green'>Current Password is correct</font>");
+    //             }
+    //         },
+    //         error: function (e) {
+    //             console.log(e)
+    //             // alert(e);
+    //         }
+    //     });
+    // });
+    $("#current_pwd").keyup(function(){
+		var current_pwd = $("#current_pwd").val();
+		$.ajax({
+			type:'get',
+			url:'/admin/check-pwd',
+			data:{current_pwd:current_pwd},
+			success:function(resp){
+				if(resp=="false"){
+					$("#chkPwd").html("<font color='red'>Current Password is incorrect</font>");
+				}else if(resp=="true"){
+					$("#chkPwd").html("<font color='green'>Current Password is correct</font>");
+				}
+			}
+		});
+	});
 
     $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 
-    $('select').select2();
+    // $('select').select2();
 
-    // Form Validation
-    $("#basic_validate").validate({
+    // add category Validation
+    $("#add_category").validate({
         rules: {
-            required: {
+            category_name: {
                 required: true
             },
-            email: {
-                required: true,
-                email: true
+            slug: {
+                required: true
+            }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+
+    // edit category Validation
+    $("#edit_category").validate({
+        rules: {
+            category_name: {
+                required: true
             },
-            date: {
-                required: true,
-                date: true
-            },
-            url: {
-                required: true,
-                url: true
+            slug: {
+                required: true
             }
         },
         errorClass: "help-inline",
@@ -99,7 +126,7 @@ $(document).ready(function () {
                 required: true,
                 minlength: 6,
                 maxlength: 20,
-                equalTo: "#pwd"
+                equalTo: "#new_pwd"
             }
         },
         errorClass: "help-inline",
