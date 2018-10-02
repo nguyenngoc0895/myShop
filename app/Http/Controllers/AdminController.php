@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\User;
+use App\Model\Category;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -72,20 +73,5 @@ class AdminController extends Controller
                 return redirect('/admin/setting')->with('message_error', 'Current Password entered is incorrect.');
             }
         }
-
-        ///this is test
-
-        // $user = User::find(Auth::user()->id);
-        // if(Hash::check(Input::get('current_pwd'), $user['password']) && Input::get('password') == Input::get('confirm_pwd')){
-
-        //     $user->password = bcrypt(Input::get('password'));
-        //     $user->save();
-        //     return redirect('/admin/setting')->with('message_success', 'Password updated successfully.');
-        // }else{
-        //     return redirect('/admin/setting')->with('message_error', 'Current Password entered is incorrect.');
-        // }
-
-        
-
-}
+    }
 }

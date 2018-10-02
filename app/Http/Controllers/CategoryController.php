@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Session;
 use App\Model\Category;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -25,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.inc.category.create');
+        $levels = Category::where(['parent_id'=>0])->get();
+        return view('admin.inc.category.create', compact('levels'));
     }
 
     /**
@@ -41,6 +45,7 @@ class CategoryController extends Controller
 
         $category = new Category;
         $category->name = $data['category_name'];
+        $category->parent_id = $data['parent_id'];
         $category->description = $data['description'];
         $category->slug = $data['slug'];
         $category->save();
@@ -68,7 +73,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::where('id', $id)->first();
-        return view('admin.inc.category.edit', compact('category'));
+        $levels = Category::where(['parent_id'=>0])->get();
+        return view('admin.inc.category.edit', compact('category', 'levels'));
     }
 
     /**
@@ -85,6 +91,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->name = $request->category_name;
         $category->description = $request->description;
+        $category->parent_id = $request->parent_id;
         $category->slug = $request->slug;
         $category->status = $request->status;
         $category->save();
@@ -100,7 +107,22 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::where('id', $id)->delete();
-        return redirect( route('category.index'))->with('message_success', 'Updated successfully');
+        //echo $id; 
+        // die($id);
+        // var_dump('ddddddddddd');
+        // $category = Category::find($id);
+        // $category->delete(); 
+        // return redirect('Category')->with('success', 'Item Has Been Delete');
+
+        // Category::where('id', $id)->delete();
+        // return redirect()->back()->with('message_success', 'delete successfully');
+       //
+        
     }
+
+    public function deleteCategory($id){
+
+        Category::where('id', $id)->delete();
+        return redirect()->back()->with('message_success', 'delete successfully');
+       } 
 }

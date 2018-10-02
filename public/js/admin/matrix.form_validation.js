@@ -40,12 +40,18 @@ $(document).ready(function () {
 
     $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 
-    // $('select').select2();
+    $('select').select2();
 
     // add category Validation
     $("#add_category").validate({
         rules: {
             category_name: {
+                required: true
+            },
+            parent_id: {
+                required: true
+            },
+            description: {
                 required: true
             },
             slug: {
@@ -69,6 +75,9 @@ $(document).ready(function () {
             category_name: {
                 required: true
             },
+            description: {
+                required: true
+            },
             slug: {
                 required: true
             }
@@ -83,6 +92,14 @@ $(document).ready(function () {
             $(element).parents('.control-group').addClass('success');
         }
     });
+
+    //delete category
+    $("#deleteCategory").click(function () {
+        if (confirm("nghĩ lại xem chú?")) {
+            return true;
+        }
+        return false;
+    })
 
     $("#number_validate").validate({
         rules: {
@@ -109,6 +126,40 @@ $(document).ready(function () {
             $(element).parents('.control-group').addClass('success');
         }
     });
+
+        // add Product Validation
+        $("#add_product").validate({
+            rules: {
+                category_id: {
+                    required: true
+                },
+                product_name: {
+                    required: true
+                },
+                product_code: {
+                    required: true
+                },
+                product_color: {
+                    required: true
+                },
+                price: {
+                    required: true,
+                    number: true
+                },
+                image: {
+                    required: true
+                }
+            },
+            errorClass: "help-inline",
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents('.control-group').addClass('error');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents('.control-group').removeClass('error');
+                $(element).parents('.control-group').addClass('success');
+            }
+        });
 
     $("#password_validate").validate({
         rules: {

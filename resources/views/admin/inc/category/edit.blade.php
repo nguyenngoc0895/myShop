@@ -31,6 +31,17 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
+                                    <label class="control-label">Category Level</label>
+                                    <div class="controls" >
+                                        <select name="parent_id" style="width:220px;">
+                                            <option value="0">Main Category </option>
+                                            @foreach($levels as $val)
+                                                <option value="{{ $val->id }}" @if($val->id == $category->parent_id) selected @endif >{{ $val->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
                                         <textarea placeholder="Place some text here" id="description" name="description">{{ $category->description }}</textarea>
@@ -49,7 +60,7 @@
                                     </div>
                                 </div>
                                 <div class="form-actions">
-                                    <input type="submit" value="Add Category" class="btn btn-success">
+                                    <input type="submit" value="Update Category" class="btn btn-success">
                                 </div>
                             </form>
                         </div>

@@ -37,23 +37,29 @@
                             <table class="table table-bordered data-table">
                                 <thead>
                                     <tr>
+                                        <th>Product ID</th>
                                         <th>Category ID</th>
-                                        <th>Parent_id</th>
                                         <th>Category Name</th>
-                                        <th>Slug</th>
-                                        <th>Action</th>
+                                        <th>Product Name</th>
+                                        <th>Product Code</th>
+                                        <th>Product Color</th>
+                                        <th>Price</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($categories as $category)
+                                    @foreach($products as $product)
                                         <tr class="gradeX">
-                                            <td>{{ $category->id }}</td>
-                                            <td>{{ $category->parent_id }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->slug }}</td>  
+                                            <td>{{ $product->id }}</td>
+                                            <td>{{ $product->category_id }}</td>
+                                            <td>{{ $product->category_name }}</td>
+                                            <td>{{ $product->product_name }}</td>
+                                            <td>{{ $product->product_code }}</td>  
+                                            <td>{{ $product->product_color }}</td>
+                                            <td>{{ $product->product_price }}</td>
                                             <td ><div class="fr">
-                                                    <a href="{{ route('category.edit', $category->id) }}" class="btn btn-primary btn-mini">Edit</a>
-                                                    <a id="deleteCategory" href="{{ route('admin.deleteCategory', $category->id) }}" class="btn btn-danger btn-mini">Delete</a>
+                                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary btn-mini">Edit</a>
+                                                    <a id="product_delete" href="{{ route('product.delete', $product->id) }}" class="btn btn-danger btn-mini">Delete</a>
                                                 </div>
                                             </td> 
                                         </tr>

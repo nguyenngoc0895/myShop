@@ -9,7 +9,12 @@
             <ul>
                 <li><a href="{{ route('category.create')}}">Add Category</a></li>
                 <li><a href="{{ route('category.index')}}">List Category</a></li>
-
+            </ul>
+        </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Products</span> <span class="label label-important">2</span></a>
+            <ul>
+                <li><a href="{{ route('product.create')}}">Add Product</a></li>
+                <li><a href="{{ route('product.index')}}">List Product</a></li>
             </ul>
         </li>
     </ul>
