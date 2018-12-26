@@ -21,6 +21,9 @@ class CreateProductsTable extends Migration
             $table->string('product_color');
             $table->float('price');
             $table->string('image');
+            $table->text('description');
+            $table->text('care');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

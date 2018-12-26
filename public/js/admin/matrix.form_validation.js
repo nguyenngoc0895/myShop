@@ -127,39 +127,95 @@ $(document).ready(function () {
         }
     });
 
-        // add Product Validation
-        $("#add_product").validate({
-            rules: {
-                category_id: {
-                    required: true
-                },
-                product_name: {
-                    required: true
-                },
-                product_code: {
-                    required: true
-                },
-                product_color: {
-                    required: true
-                },
-                price: {
-                    required: true,
-                    number: true
-                },
-                image: {
-                    required: true
-                }
+    // add Product Validation
+    $("#add_product").validate({
+        rules: {
+            category_id: {
+                required: true
             },
-            errorClass: "help-inline",
-            errorElement: "span",
-            highlight: function (element, errorClass, validClass) {
-                $(element).parents('.control-group').addClass('error');
+            product_name: {
+                required: true
             },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).parents('.control-group').removeClass('error');
-                $(element).parents('.control-group').addClass('success');
+            product_code: {
+                required: true
+            },
+            product_color: {
+                required: true
+            },
+            price: {
+                required: true,
+                number: true
+            },
+            image: {
+                required: true
             }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+        
+    // update Product Validation
+    $("#update_product").validate({
+        rules: {
+            category_id: {
+                required: true
+            },
+            product_name: {
+                required: true
+            },
+            product_code: {
+                required: true
+            },
+            product_color: {
+                required: true
+            },
+            price: {
+                required: true,
+                number: true
+            },
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+    
+    //delete Record
+    $(document).on('click','.deleteRecord',function(e){
+        var id = $(this).attr('rel');
+        var deleteFunction = $(this).attr('rel1');
+        swal({
+            title: "Are you sure?",
+            text: "Your will not be able to recover this Record Again!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: 'No, cacel!',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+        },
+        function(){
+            window.location.href="/admin/"+deleteFunction+"/"+id;
         });
+    });
+
 
     $("#password_validate").validate({
         rules: {
@@ -189,5 +245,29 @@ $(document).ready(function () {
             $(element).parents('.control-group').removeClass('error');
             $(element).parents('.control-group').addClass('success');
         }
+    });
+
+    $(document).ready(function(){
+        var maxField = 10; //Input fields increment limitation
+        var addButton = $('.add_button'); //Add button selector
+        var wrapper = $('.field_wrapper'); //Input field wrapper
+        var fieldHTML = '<div class="controls field_wrapper" style="margin-left:-2px;"><input type="text" placeholder="SKU" name="sku[]" style="width:120px"/>&nbsp;<input type="text" placeholder="Size" name="size[]" style="width:120px"/>&nbsp;<input type="text" placeholder="Price" name="price[]" style="width:120px"/>&nbsp;<input type="text" placeholder="Stock" name="stock[]" style="width:120px"/><button href="javascript:void(0);" class="btn btn-danger remove_button" title="Remove field">Remove</button></div>'; //New input field html 
+        var x = 1; //Initial field counter is 1
+        
+        //Once add button is clicked
+        $(addButton).click(function(){
+            //Check maximum number of input fields
+            if(x < maxField){ 
+                x++; //Increment field counter
+                $(wrapper).append(fieldHTML); //Add field html
+            }
+        });
+        
+        //Once remove button is clicked
+        $(wrapper).on('click', '.remove_button', function(e){
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
     });
 });

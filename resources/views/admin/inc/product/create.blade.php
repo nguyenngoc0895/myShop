@@ -70,11 +70,17 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                        <label class="control-label">Description</label>
-                                        <div class="controls">
-                                            <textarea placeholder="Place some text here" id="description" name="description"></textarea>
-                                        </div>
+                                    <label class="control-label">Description</label>
+                                    <div class="controls">
+                                        <textarea placeholder="Place some text here" id="description" name="description"></textarea>
                                     </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Material & Care</label>
+                                    <div class="controls">
+                                        <textarea placeholder="Place some text here" id="care" name="care"></textarea>
+                                    </div>
+                                </div>
                                 <div class="control-group">
                                     <label class="control-label">Product Price</label>
                                     <div class="controls">
@@ -86,7 +92,8 @@
                                     <div class="controls">
                                         <div class="uploader" id="uniform-undefined">
                                             <input name="image" id="image" type="file" size="19" style="opacity: 0;">
-                                            <span class="filename">No file selected</span><span class="action">Choose File</span>
+                                            <span class="filename">No file selected</span>
+                                            <span class="action">Choose File</span>
                                         </div>
                                     </div>
                                 </div>

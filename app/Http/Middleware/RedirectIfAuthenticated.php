@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
             return redirect('/home');
         }
         else{
-            return redirect()->action('AdminController@login')->with('message_error', 'vội thế chú =)))');
+            return redirect()->action('Admin\AdminController@login')->with('message_error', 'vội thế chú =)))');
         }
 
         return $next($request);
